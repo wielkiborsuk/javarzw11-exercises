@@ -1,5 +1,7 @@
 package com.sda.javarzw11.money;
 
+import com.sda.javarzw11.money.exceptions.NotEnoughMoneyException;
+
 public class Person {
 
     String name;
@@ -11,8 +13,12 @@ public class Person {
     }
 
     public void giveMoneyToPerson(Money money, Person other) {
-        this.wallet.takeOutMoney(money);
-        other.receiveMoney(money);
+        try {
+            this.wallet.takeOutMoney(money);
+            other.receiveMoney(money);
+        } catch (NotEnoughMoneyException e) {
+            System.out.println("coudn't pay");
+        }
     }
 
     public void receiveMoney(Money money) {
